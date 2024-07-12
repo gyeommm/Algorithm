@@ -7,20 +7,19 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int[] arr = new int[n];
-        arr[0] = Integer.parseInt(st.nextToken());
-        int[][] dp = new int[n][2];
-        dp[0][0] = arr[0];
-        dp[0][1] = arr[0];
-        for (int i = 1; i < n; i++) {
+        int[] arr = new int[n + 1];
+        int[] dp = new int[n + 1];
+        dp[0] = -1000;
+        int result = -1000;
+        for (int i = 1; i <= n; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
 
-            dp[i][0] = arr[i] + Math.max(dp[i - 1][0], 0);
-            dp[i][1] = Math.max(dp[i - 1][0], dp[i - 1][1]);
+            dp[i] = Math.max(dp[i - 1] + arr[i], arr[i]);
+            result = Math.max(result, dp[i]);
         }
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        bw.write(Integer.toString(Math.max(dp[n - 1][0], dp[n - 1][1])));
+        bw.write(Integer.toString(result));
         bw.close();
     }
 }
