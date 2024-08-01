@@ -1,44 +1,31 @@
 class Solution {
-    static int answer = 0;
+    static int count = 0, answer = 0;
+    static boolean check = false;
     static char[] alpha = {'A', 'E', 'I', 'O', 'U'};
     static StringBuilder s = new StringBuilder();
+    static String w;
 
-    public static boolean f(int k, String word) {
-        s.append(alpha[k]);
-        answer++;
+    public static void f(StringBuilder now) {
+        if(w.equals(String.valueOf(now))){
+            answer = count;
+            check = true;
+            return;
+        }
 
-        if (word.contentEquals(s))
-            return true;
-        return false;
+        if(check || now.length() == 5)
+            return;
+
+        for(int i = 0; i < 5; i++){
+            StringBuilder next = new StringBuilder(now);
+            next.append(alpha[i]);
+            count++;
+            f(next);
+        }
     }
 
     public static int solution(String word) {
-        for(int a = 0; a < 5; a++){
-            if(f(a, word))
-                return answer;
-            for(int b = 0; b < 5; b++){
-                if(f(b, word))
-                    return answer;
-                for(int c = 0; c < 5; c++){
-                    if(f(c, word))
-                        return answer;
-                    for(int d = 0; d < 5; d++){
-                        if(f(d, word))
-                            return answer;
-                        for(int e = 0; e < 5; e++){
-                            if(f(e, word))
-                                return answer;
-                            s = new StringBuilder(s.substring(0, s.length() - 1));
-                        }
-                        s = new StringBuilder(s.substring(0, s.length() - 1));
-                    }
-                    s = new StringBuilder(s.substring(0, s.length() - 1));
-                }
-                s = new StringBuilder(s.substring(0, s.length() - 1));
-            }
-            s = new StringBuilder(s.substring(0, s.length() - 1));
-        }
-
-        return -1;
+        w = word;
+        f(new StringBuilder(""));
+        return answer;
     }
 }
