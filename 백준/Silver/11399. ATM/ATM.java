@@ -11,9 +11,11 @@ public class Main {
             arr[i] = Integer.parseInt(st.nextToken());
 
         Arrays.sort(arr);
-        int sum = 0;
-        for (int i = 0; i < n; i++)
-            sum += arr[i] * (n - i);
+        int sum = 0, temp = 0;
+        for (int i = 0; i < n; i++) {
+            temp += arr[i];
+            sum += temp;
+        }
 
         System.out.println(sum);
     }
