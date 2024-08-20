@@ -23,32 +23,28 @@ public class Main {
             return o1[0] - o2[0];
         });
 
-        int count = 0;
-        int idx = 0;
-        int maxEnd = 301;
-        int currentEnd = 301;
-
-        while(currentEnd <= 1130){
+        int result = 0, index = 0;
+        int start = 301, end = 301;
+        while (start <= 1130) {
             boolean flag = false;
 
-            while(idx < n && arr[idx][0] <= currentEnd){
-                if(arr[idx][1] > maxEnd){
-                    maxEnd = arr[idx][1];
+            while (index < n && arr[index][0] <= start) {
+                if (arr[index][1] > end) {
+                    end = arr[index][1];
                     flag = true;
                 }
-                idx++;
+                index++;
             }
 
-            if(flag){
-
-                count++;
-                currentEnd = maxEnd;
-            }else{
-                System.out.println(0);
-                return;
+            if (!flag) {
+                result = 0;
+                break;
             }
+
+            result++;
+            start = end;
         }
 
-        System.out.println(count);
+        System.out.println(result);
     }
 }
