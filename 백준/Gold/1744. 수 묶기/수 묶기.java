@@ -12,8 +12,8 @@ public class Main{
         Arrays.sort(arr);
 
         int result = 0;
-        boolean zero = false;
         int temp = 0;
+        boolean zero = false;
         for(int i = n - 1; i >= 0; i--){
             if(arr[i] > 0){
                 if(temp != 0){
@@ -38,7 +38,6 @@ public class Main{
                     else
                         temp = arr[j];
                 }
-
                 break;
             }
             else{
