@@ -2,29 +2,26 @@ import java.util.*;
 
 public class Solution {
     String s;
+    Set<Integer> answer = new HashSet<>();
     boolean[] visited;
-    boolean[] visited2;
-    boolean[] second;
-    int answer = 0;
+    boolean[] isPrime;
 
     public void f(int size, StringBuilder now){
         if (now.length() == size) {
             int num = Integer.parseInt(String.valueOf(now));
-            if (second[num] && !visited[num]) {
-                visited[num] = true;
-                answer++;
-            }
+            if (isPrime[num])
+                answer.add(num);
 
             return;
         }
 
         for (int i = 0; i < s.length(); i++) {
-            if(visited2[i])
+            if(visited[i])
                 continue;
 
-            visited2[i] = true;
+            visited[i] = true;
             f(size, new StringBuilder(now.append(s.charAt(i))));
-            visited2[i] = false;
+            visited[i] = false;
             now = new StringBuilder(now.substring(0, now.length() - 1));
         }
     }
@@ -32,25 +29,24 @@ public class Solution {
     public int solution(String numbers) {
         s = numbers;
 
-        second = new boolean[(int)Math.pow(10, s.length())];
-        Arrays.fill(second, true);
-        second[0] = false;
-        second[1] = false;
+        isPrime = new boolean[(int)Math.pow(10, s.length())];
+        Arrays.fill(isPrime, true);
+        isPrime[0] = false;
+        isPrime[1] = false;
 
-        for(int i = 2; i * i < second.length; i++){
-            if(!second[i])
+        for(int i = 2; i * i < isPrime.length; i++){
+            if(!isPrime[i])
                 continue;
 
-            for(int j = i * i; j < second.length; j += i)
-                second[j] = false;
+            for(int j = i * i; j < isPrime.length; j += i)
+                isPrime[j] = false;
         }
 
-        visited = new boolean[second.length];
         for (int i = 1; i <= s.length(); i++) {
-            visited2 = new boolean[s.length()];
+            visited = new boolean[s.length()];
             f(i, new StringBuilder());
         }
 
-        return answer;
+        return answer.size();
     }
 }
