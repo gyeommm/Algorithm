@@ -22,7 +22,7 @@ int main(){
             if(v[i][j] != 1)
                 continue;
             
-            int visit[100][100] = {0,};
+            int visit[100][100] = {0};
             queue<pair<int, int>> q;
             queue<pair<int, int>> qq;
            
@@ -60,10 +60,10 @@ int main(){
                 for(int i = 0; i < 4; i++){
                     int nr = r + d[i][0];
                     int nc = c + d[i][1];
-                    if(nr < 0 || nc < 0 || nr >= n || nc >= n || visit[nr][nc] > 0 || v[nr][nc] == -1)
+                    if(nr < 0 || nc < 0 || nr >= n || nc >= n || visit[nr][nc] > 0)
                         continue;
                     
-                    if(v[nr][nc] == 1){
+                    if(v[nr][nc] == 1 || v[nr][nc] == -1){
                         ans = min(ans, visit[r][c]);
                         qq = queue<pair<int, int>>();
                         break;
