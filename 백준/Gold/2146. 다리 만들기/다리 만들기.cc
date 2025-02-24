@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <queue>
 #include <algorithm>
 using namespace std;
@@ -12,7 +11,7 @@ int main(){
     int n, ans = 10000;
     cin >> n;
     
-    vector<vector<int>> v(n, vector<int>(n, -1));
+    int v[100][100];
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++)
             cin >> v[i][j];
@@ -23,7 +22,7 @@ int main(){
             if(v[i][j] != 1)
                 continue;
             
-            vector<vector<int>> visit(n, vector<int>(n));
+            int visit[100][100] = {0,};
             queue<pair<int, int>> q;
             queue<pair<int, int>> qq;
            
@@ -39,7 +38,7 @@ int main(){
                 for(int i = 0; i < 4; i++){
                     int nr = r + d[i][0];
                     int nc = c + d[i][1];
-                    if(nr < 0 || nc < 0 || nr >= n || nr >= n || visit[nr][nc] > 0)
+                    if(nr < 0 || nc < 0 || nr >= n || nc >= n || visit[nr][nc] > 0)
                         continue;
                     
                     visit[nr][nc] = 1;
@@ -53,7 +52,6 @@ int main(){
                 }
             }
             
-            vector<vector<int>> vv = v;
             while(!qq.empty()){
                 int r = qq.front().first;
                 int c = qq.front().second;
@@ -62,12 +60,12 @@ int main(){
                 for(int i = 0; i < 4; i++){
                     int nr = r + d[i][0];
                     int nc = c + d[i][1];
-                    if(nr < 0 || nc < 0 || nr >= n || nr >= n || visit[nr][nc] > 0 || vv[nr][nc] == -1)
+                    if(nr < 0 || nc < 0 || nr >= n || nc >= n || visit[nr][nc] > 0 || v[nr][nc] == -1)
                         continue;
                     
-                    if(vv[nr][nc] == 1){
+                    if(v[nr][nc] == 1){
                         ans = min(ans, visit[r][c]);
-                        queue<pair<int, int>>().swap(qq);
+                        qq = queue<pair<int, int>>();
                         break;
                     }
                     
