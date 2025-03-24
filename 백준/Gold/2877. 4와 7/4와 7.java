@@ -6,30 +6,27 @@ public class Main{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int k = Integer.parseInt(br.readLine());
-        int count = 0;
-        int rest = ++k;
-
-        while (rest >= 2) {
-            rest /= 2;
-            count++;
+        int k = Integer.parseInt(br.readLine()) + 1;
+        StringBuilder sb = new StringBuilder();
+        int num;
+        while (k > 0) {
+            num = k % 2;
+            sb.append(num);
+            k /= 2;
         }
-        k -= (int) Math.pow(2, count--);
 
         StringBuilder result = new StringBuilder();
-        while (count >= 0) {
-            int now = (int) Math.pow(2, count--);
-
-            if (k >= now) {
-                k -= now;
-                result.append("7");
+        String binary = sb.toString();
+        for(int i = binary.length() - 2; i >= 0; i--) {
+            if (binary.charAt(i) == '1') {
+                result.append(7);
             } else {
-                result.append("4");
+                result.append(4);
             }
         }
 
         bw.write(result.toString());
-        bw.flush();
         br.close();
+        bw.flush();
     }
 }
