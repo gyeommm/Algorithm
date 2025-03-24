@@ -1,4 +1,3 @@
-import java.util.*;
 import java.io.*;
 
 public class Main{
@@ -7,17 +6,10 @@ public class Main{
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int k = Integer.parseInt(br.readLine()) + 1;
-        StringBuilder sb = new StringBuilder();
-        int num;
-        while (k > 0) {
-            num = k % 2;
-            sb.append(num);
-            k /= 2;
-        }
+        String binary = Integer.toBinaryString(k);
 
         StringBuilder result = new StringBuilder();
-        String binary = sb.toString();
-        for(int i = binary.length() - 2; i >= 0; i--) {
+        for(int i = 1; i < binary.length(); i++) {
             if (binary.charAt(i) == '1') {
                 result.append(7);
             } else {
