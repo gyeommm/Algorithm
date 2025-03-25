@@ -1,5 +1,5 @@
 #include <iostream>
-#include <queue>
+#include <deque>
 using namespace std;
 
 int main(){
@@ -9,21 +9,18 @@ int main(){
     int n, l;
     cin >> n >> l;
     
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    deque<pair<int, int>> dq;
     for(int i = 0; i < n; i++){
         int a;
         cin >> a;
         
-        pq.push({a, i});
-        while(true){
-            pair<int, int> temp = pq.top();
-            
-            if(temp.second > i - l){
-                cout << temp.first << " ";
-                break;
-            }
-            pq.pop();
-        }
+        while(!dq.empty() && dq.back().first >= a)
+            dq.pop_back();
+        dq.push_back({a, i});
+        
+        if(dq.front().second <= i - l)
+            dq.pop_front();
+        cout << dq.front().first << ' ';
     }
     
     return 0;
