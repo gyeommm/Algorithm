@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Main{
     static char[][] arr;
@@ -16,21 +17,21 @@ public class Main{
         divide(sr + (er - sr) / 2 + 1, er, sc + (ec - sc) / 2 + 1, ec);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
         arr = new char[n][n * 2 - 1];
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < n; i++)
             Arrays.fill(arr[i], ' ');
-        }
 
         divide(0, arr.length - 1, 0, arr[0].length - 1);
 
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < arr.length; i++)
-            sb.append(arr[i]).append('\n');
-
-        System.out.println(sb);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        for (int i = 0; i < arr.length; i++) {
+            bw.write(arr[i]);
+            bw.newLine();
+        }
+        bw.close();
     }
 }
