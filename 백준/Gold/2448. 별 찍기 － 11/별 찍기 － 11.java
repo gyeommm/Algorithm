@@ -18,8 +18,9 @@ public class Main{
     }
 
     public static void main(String[] args) throws IOException{
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int n = Integer.parseInt(br.readLine());
 
         arr = new char[n][n * 2 - 1];
         for(int i = 0; i < n; i++)
@@ -27,11 +28,12 @@ public class Main{
 
         divide(0, arr.length - 1, 0, arr[0].length - 1);
 
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         for (int i = 0; i < arr.length; i++) {
             bw.write(arr[i]);
             bw.newLine();
         }
+
+        br.close();
         bw.close();
     }
 }
