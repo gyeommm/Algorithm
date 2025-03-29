@@ -10,7 +10,7 @@ public class Main{
                 arr[sr + p[i][0]][sc + p[i][1]] = '*';
             return;
         }
-        
+
         divide(sr, sr + (er - sr) / 2, sc + (ec - sc) / 4 + 1, ec - ((ec - sc) / 4 + 1));
         divide(sr + (er - sr) / 2 + 1, er, sc, sc + (ec - sc) / 2 - 1);
         divide(sr + (er - sr) / 2 + 1, er, sc + (ec - sc) / 2 + 1, ec);
@@ -28,11 +28,8 @@ public class Main{
         divide(0, arr.length - 1, 0, arr[0].length - 1);
 
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < arr.length; i++){
-            for(int j = 0; j < arr[0].length; j++)
-                sb.append(arr[i][j]);
-            sb.append('\n');
-        }
+        for(int i = 0; i < arr.length; i++)
+            sb.append(arr[i]).append('\n');
 
         System.out.println(sb);
     }
