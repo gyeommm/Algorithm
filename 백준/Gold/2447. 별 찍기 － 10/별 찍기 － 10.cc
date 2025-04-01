@@ -11,17 +11,15 @@ void star(int i, int j, int n) {
 }
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
 	int n;
 	cin >> n;
 	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
+		for (int j = 0; j < n; j++)
 			star(i, j, n);
-		}
-		cout << "\n";
+		cout << '\n';
 	}
 
 	return 0;
