@@ -24,7 +24,21 @@ public class Main{
         }
 
         for(int size = 5; size > 0; size--){
-            if(!isPossible(r, c, size) || paper[size] == 5){
+            if(r + size > 10 || c + size > 10 || paper[size] == 5){
+                continue;
+            }
+
+            boolean isPossible = true;
+            for(int i = r; i < r + size; i++){
+                for(int j = c; j < c + size; j++){
+                    if(arr[i][j] == 0){
+                        isPossible = false;
+                        i = r + size;
+                        break;
+                    }
+                }
+            }
+            if (!isPossible) {
                 continue;
             }
 
@@ -43,18 +57,6 @@ public class Main{
             }
             paper[size]--;
         }
-    }
-
-    static boolean isPossible(int r, int c, int size) {
-        for(int i = r; i < r + size; i++) {
-            for(int j = c; j < c + size; j++) {
-                if (i >= 10 || j >= 10 || arr[i][j] == 0) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 
     public static void main(String[] args) throws IOException {
