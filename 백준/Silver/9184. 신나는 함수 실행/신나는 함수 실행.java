@@ -9,7 +9,6 @@ public class Main{
         
         while(true){
             StringTokenizer st = new StringTokenizer(br.readLine());
-            
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
@@ -18,7 +17,9 @@ public class Main{
                 break;
             }
             
-            System.out.println("w(" + a + ", " + b + ", " + c + ") = " + w(a, b, c));
+            StringBuilder sb = new StringBuilder();
+            sb.append("w(").append(a).append(", ").append(b).append(", ").append(c).append(") = ").append(w(a, b, c));
+            System.out.println(sb);
         }
     }
     
