@@ -6,6 +6,7 @@ public class Main{
     
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         
         while(true){
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -17,10 +18,10 @@ public class Main{
                 break;
             }
             
-            StringBuilder sb = new StringBuilder();
-            sb.append("w(").append(a).append(", ").append(b).append(", ").append(c).append(") = ").append(w(a, b, c));
-            System.out.println(sb);
+            sb.append("w(").append(a).append(", ").append(b).append(", ").append(c).append(") = ").append(w(a, b, c)).append("\n");
         }
+        
+        System.out.print(sb);
     }
     
     static int w(int a, int b, int c){
@@ -37,7 +38,7 @@ public class Main{
             dp[a][b][c] = w(a, b, c - 1) + w(a, b - 1, c - 1) - w(a, b - 1, c);
         }
         else{
-            dp[a][b][c] = w(a-1, b, c) + w(a - 1, b - 1, c) + w(a - 1, b, c - 1) - w(a - 1, b - 1, c - 1);
+            dp[a][b][c] = w(a - 1, b, c) + w(a - 1, b - 1, c) + w(a - 1, b, c - 1) - w(a - 1, b - 1, c - 1);
         }
         
         return dp[a][b][c];
