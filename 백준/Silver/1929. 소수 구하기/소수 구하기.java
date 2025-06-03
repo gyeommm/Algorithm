@@ -15,7 +15,7 @@ class Main{
                 continue;
             }
             
-            for(int j = i + i; j <= n; j += i){
+            for(int j = i * i; j <= n; j += i){
                 prime[j] = true;
             }
         }
