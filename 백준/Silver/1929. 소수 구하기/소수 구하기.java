@@ -1,10 +1,12 @@
 import java.util.*;
+import java.io.*;
 
 class Main{
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int m = sc.nextInt();
-        int n = sc.nextInt();
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int m = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
         
         boolean[] prime = new boolean[n + 1];
         prime[1] = true;
