@@ -19,8 +19,10 @@ public class Main {
             }
         }
 
+        StringBuilder sb = new StringBuilder();
         for(String s : set){
-            System.out.println(s);
+            sb.append(s).append("\n");
         }
+        System.out.print(sb);
     }
 }
