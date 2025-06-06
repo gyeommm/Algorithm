@@ -16,22 +16,21 @@ class Main{
         while(true){
             int[] balloon = dq.pollFirst();
             sb.append(balloon[0]).append(" ");
-
+            
             if(dq.isEmpty()){
                 break;
             }
 
             if(balloon[1] < 0){
                 balloon[1] %= dq.size();
-
-                while(balloon[1]++ < 0){
-                    dq.addFirst(dq.pollLast());
-                }
+                balloon[1] += dq.size();
             }else{
-                balloon[1] = (--balloon[1]) % dq.size();
-                while(balloon[1]-- > 0){
-                    dq.addLast(dq.pollFirst());
-                }
+                balloon[1]--;
+                balloon[1] %= dq.size();
+            }
+
+            while(balloon[1]-- > 0){
+                dq.addLast(dq.pollFirst());
             }
         }
         System.out.print(sb);
