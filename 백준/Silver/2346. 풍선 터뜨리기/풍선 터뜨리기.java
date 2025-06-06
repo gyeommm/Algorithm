@@ -21,13 +21,15 @@ class Main{
                 break;
             }
 
-//            balloon[1] %= dq.size();
             if(balloon[1] < 0){
+                balloon[1] %= dq.size();
+
                 while(balloon[1]++ < 0){
                     dq.addFirst(dq.pollLast());
                 }
             }else{
-                while(--balloon[1] > 0){
+                balloon[1] = (--balloon[1]) % dq.size();
+                while(balloon[1]-- > 0){
                     dq.addLast(dq.pollFirst());
                 }
             }
