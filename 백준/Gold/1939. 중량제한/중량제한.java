@@ -37,7 +37,10 @@ class Main{
         while(!pq.isEmpty()){
             int[] now = pq.poll();
 
-            if(dp[now[0]] <= dp[e] || now[0] == e){
+            if(now[0] == e){
+                break;
+            }
+            if(dp[now[0]] <= dp[e]){
                 continue;
             }
 
