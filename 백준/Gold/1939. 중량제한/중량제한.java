@@ -31,8 +31,8 @@ class Main{
             return b[1] - a[1];
         });
         int[] dp = new int[n + 1];
-        pq.offer(new int[]{s, Integer.MAX_VALUE});
-        dp[s] = Integer.MAX_VALUE;
+        pq.offer(new int[]{s, 1000000000});
+        dp[s] = 1000000000;
 
         while(!pq.isEmpty()){
             int[] now = pq.poll();
