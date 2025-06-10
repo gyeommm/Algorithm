@@ -8,9 +8,9 @@ class Main{
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
 
-        List<Map<Integer, Integer>> list = new ArrayList<>();    // {이동 가능한 섬, 중량제한}
-        for(int i = 0; i <= n; i++){
-            list.add(new HashMap<>());
+        List<int[]>[] list = new ArrayList[n + 1];    // {이동 가능한 섬, 중량제한}
+        for(int i = 1; i <= n; i++){
+            list[i] = new ArrayList<>();
         }
 
         for(int i = 0; i < m; i++){
@@ -19,8 +19,8 @@ class Main{
             int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
 
-            list.get(a).put(b, Math.max(list.get(a).getOrDefault(b, 0), c));
-            list.get(b).put(a, Math.max(list.get(b).getOrDefault(a, 0), c));
+            list[a].add(new int[]{b, c});
+            list[b].add(new int[]{a, c});
         }
 
         st = new StringTokenizer(br.readLine());
@@ -44,15 +44,15 @@ class Main{
                 continue;
             }
 
-            for(int k : list.get(now[0]).keySet()){
-                int v = Math.min(now[1], list.get(now[0]).get(k));
+            for(int[] next : list[now[0]]){
+                next[1] = Math.min(next[1], now[1]);
 
-                if(v <= dp[k]){
+                if(next[1] <= dp[next[0]]){
                     continue;
                 }
 
-                pq.offer(new int[]{k, v});
-                dp[k] = v;
+                pq.offer(next);
+                dp[next[0]] = next[1];
             }
         }
         System.out.print(dp[e]);
