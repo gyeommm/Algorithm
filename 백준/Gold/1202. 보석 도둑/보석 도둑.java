@@ -18,28 +18,33 @@ class Main{
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
         
-        PriorityQueue<Gem> pq1 = new PriorityQueue<>((a, b) -> a.w - b.w);
+        PriorityQueue<Gem> pq = new PriorityQueue<>((a, b) -> b.v - a.v);
         for(int i = 0; i < n; i++){
             st = new StringTokenizer(br.readLine());
-            pq1.offer(new Gem(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
+            pq.offer(new Gem(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
         }
         
-        int[] beg = new int[k];
+        TreeMap<Integer, Integer> bag = new TreeMap<>();
         for(int i = 0; i < k; i++){
-            beg[i] = Integer.parseInt(br.readLine());
+            int w = Integer.parseInt(br.readLine());
+            bag.put(w, bag.getOrDefault(w, 0) + 1);
         }
-        Arrays.sort(beg);
         
-        PriorityQueue<Integer> pq2 = new PriorityQueue<>((a, b) -> b - a);
         long result = 0;
-        for(int i = 0; i < k; i++){
-            while(!pq1.isEmpty() && pq1.peek().w <= beg[i]){
-                pq2.offer(pq1.poll().v);
+        while(!pq.isEmpty() && !bag.isEmpty()){
+            Gem gem = pq.poll();
+            
+            Integer findedBag = bag.ceilingKey(gem.w);
+            if(findedBag == null){
+                continue;
             }
             
-            if(!pq2.isEmpty()){
-                result += pq2.poll();
+            if(bag.get(findedBag) == 1){
+                bag.remove(findedBag);
+            }else{
+                bag.put(findedBag, bag.get(findedBag) - 1);
             }
+            result += gem.v;
         }
         System.out.print(result);
     }
