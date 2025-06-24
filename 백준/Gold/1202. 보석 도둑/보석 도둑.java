@@ -2,26 +2,16 @@ import java.util.*;
 import java.io.*;
 
 class Main{
-    static class Gem{
-        int w;
-        int v;
-        
-        Gem(int w, int v){
-            this.w = w;
-            this.v = v;
-        }
-    }
-    
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
         
-        PriorityQueue<Gem> pq = new PriorityQueue<>((a, b) -> b.v - a.v);
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[1] - a[1]);
         for(int i = 0; i < n; i++){
             st = new StringTokenizer(br.readLine());
-            pq.offer(new Gem(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
+            pq.offer(new int[]{Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())});
         }
         
         TreeMap<Integer, Integer> bag = new TreeMap<>();
@@ -32,9 +22,9 @@ class Main{
         
         long result = 0;
         while(!pq.isEmpty() && !bag.isEmpty()){
-            Gem gem = pq.poll();
+            int[] gem = pq.poll();
             
-            Integer findedBag = bag.ceilingKey(gem.w);
+            Integer findedBag = bag.ceilingKey(gem[0]);
             if(findedBag == null){
                 continue;
             }
@@ -44,7 +34,7 @@ class Main{
             }else{
                 bag.put(findedBag, bag.get(findedBag) - 1);
             }
-            result += gem.v;
+            result += gem[1];
         }
         System.out.print(result);
     }
