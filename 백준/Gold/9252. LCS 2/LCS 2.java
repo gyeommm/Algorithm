@@ -45,9 +45,11 @@ class Main{
             }
         }
 
-        StringBuilder sb = new StringBuilder();
         int r = s1.length();
         int c = s2.length();
+        System.out.println(dp[r][c].l);
+
+        StringBuilder sb = new StringBuilder();
         if(dp[r][c].l > 0) {
             while (r != 0 && c != 0) {
                 if (s1.charAt(r - 1) == s2.charAt(c - 1)) {
@@ -59,11 +61,7 @@ class Main{
                 r = tempR;
                 c = tempC;
             }
-            sb.append("\n");
+            System.out.print(sb.reverse());
         }
-
-        StringBuilder result = new StringBuilder();
-        result.append(dp[s1.length()][s2.length()].l).append(sb.reverse());
-        System.out.print(result);
     }
 }
