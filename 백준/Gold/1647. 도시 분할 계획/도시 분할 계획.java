@@ -34,22 +34,23 @@ class Main{
             p[i] = i;
         }
 
-        Edge[] e = new Edge[m];
+        PriorityQueue<Edge> pq = new PriorityQueue<>((a, b) -> a.w - b.w);
         for(int i = 0; i < m; i++){
             st = new StringTokenizer(br.readLine());
-            e[i] = new Edge(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+            pq.offer(new Edge(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
         }
-        Arrays.sort(e, (a, b) -> a.w - b.w);
-
+        
         int result = 0;
         int max = 0;
-        for(Edge now : e){
+        while(!pq.isEmpty()){
+            Edge now = pq.poll();
+            
             int sp = find(now.s);
             int ep = find(now.e);
             if(sp == ep){
                 continue;
             }
-
+            
             if(sp > ep){
                 p[sp] = ep;
             }else{
