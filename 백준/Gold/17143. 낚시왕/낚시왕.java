@@ -26,7 +26,7 @@ class Main{
         int[][] D = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
         Map<Integer, Shark> m = new HashMap<>();
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        Queue<Integer> q = new ArrayDeque<>();
         int[][] sea = new int[R][C];
         for(int i = 1; i <= M; i++){
             st = new StringTokenizer(br.readLine());
@@ -37,7 +37,7 @@ class Main{
             int z = Integer.parseInt(st.nextToken());
 
             m.put(z, new Shark(r, c, s, d));
-            pq.offer(z);
+            q.offer(z);
             sea[r][c] = z;
         }
 
@@ -54,8 +54,8 @@ class Main{
             sea = new int[R][C];
 
             // 상어 이동
-            while(!pq.isEmpty()){
-                int z = pq.poll();
+            while(!q.isEmpty()){
+                int z = q.poll();
 
                 if(!m.containsKey(z)){
                     continue;
@@ -82,13 +82,18 @@ class Main{
                     shark.d = 5 - shark.d;
                 }
 
+                if(sea[shark.r][shark.c] > z){
+                    m.remove(z);
+                    continue;
+                }
+
                 m.remove(sea[shark.r][shark.c]);
                 m.put(z, shark);
                 sea[shark.r][shark.c] = z;
             }
 
             for(int z : m.keySet()){
-                pq.offer(z);
+                q.offer(z);
             }
         }
 
