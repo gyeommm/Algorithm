@@ -6,32 +6,27 @@ class Main{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int m = Integer.parseInt(br.readLine());
         
-        Set<Integer> set = new HashSet<>();
+        boolean[] arr = new boolean[20];
         StringBuilder sb = new StringBuilder();
         while(m-- > 0){
             StringTokenizer st = new StringTokenizer(br.readLine());
             String s = st.nextToken();
             
             if("all".equals(s)){
-                set.clear();
-                for(int i = 1; i <= 20; i++){
-                    set.add(i);
-                }
+                Arrays.fill(arr, true);
             }else if("empty".equals(s)){
-                set.clear();
+                Arrays.fill(arr, false);
             }else{
-                int n = Integer.parseInt(st.nextToken());
+                int n = Integer.parseInt(st.nextToken()) - 1;
                 
                 if("add".equals(s)){
-                    set.add(n);
+                    arr[n] = true;
                 }else if("remove".equals(s)){
-                    set.remove(n);
+                    arr[n] = false;
                 }else if("check".equals(s)){
-                    sb.append(set.contains(n) ? 1 : 0).append("\n");
+                    sb.append(arr[n] ? 1 : 0).append("\n");
                 }else if("toggle".equals(s)){
-                    if(!set.add(n)){
-                        set.remove(n);
-                    }
+                    arr[n] = !arr[n];
                 }
             }
         }
