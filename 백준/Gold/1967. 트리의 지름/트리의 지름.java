@@ -53,11 +53,7 @@ class Main{
             tree[u].add(new Node(v, m));
             tree[v].add(new Node(u, m));
         }
-
-        for(int i = 1; i <= n; i++){
-            Collections.sort(tree[i], (a, b) -> b.m - a.m);
-        }
-
+        
         visited = new boolean[n + 1];
         dfs(1, 0);
 
