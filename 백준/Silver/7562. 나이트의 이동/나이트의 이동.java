@@ -23,9 +23,11 @@ class Main{
             q.offer(new int[]{r, c});
             visited[r][c] = 1;
             
-            boolean check = true;
-            while(check && !q.isEmpty()){
+            while(!q.isEmpty()){
                 int[] now = q.poll();
+                if(now[0] == gr && now[1] == gc){
+                    break;
+                }
                 
                 for(int i = 0; i < 8; i++){
                     int[] next = {now[0] + d[i][0], now[1] + d[i][1]};
@@ -34,13 +36,8 @@ class Main{
                         continue;
                     }
                     
-                    visited[next[0]][next[1]] = visited[now[0]][now[1]] + 1;
-                    if(next[0] == gr && next[1] == gc){
-                        check = false;
-                        break;
-                    }
-                    
                     q.offer(next);
+                    visited[next[0]][next[1]] = visited[now[0]][now[1]] + 1;
                 }
             }
             sb.append(visited[gr][gc] - 1).append("\n");
