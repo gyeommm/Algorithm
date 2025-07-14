@@ -26,12 +26,10 @@ int main(){
     }
     
     string result = to_string(n);
-    if(n % 3 == 0){
-        if(n % 5 == 0){
-            result = "FizzBuzz";
-        }else{
-            result = "Fizz";
-        }
+    if(n % 15 == 0){
+        result = "FizzBuzz";
+    }else if(n % 3 == 0){
+        result = "Fizz";
     }else if(n % 5 == 0){
         result = "Buzz";
     }
