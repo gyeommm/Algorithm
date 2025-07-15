@@ -15,8 +15,8 @@ class Main{
             int h = Integer.parseInt(st.nextToken());
 
             char[][] arr = new char[h][w];
-            Queue<int[]> fire = new ArrayDeque<>();
-            Queue<int[]> person = new ArrayDeque<>();
+            Queue<int[]> q = new ArrayDeque<>();
+            int[] person = new int[3];
 
             for(int i = 0; i < h; i++){
                 String s = br.readLine();
@@ -24,53 +24,46 @@ class Main{
                     arr[i][j] = s.charAt(j);
 
                     if(arr[i][j] == '*'){
-                        fire.offer(new int[]{i, j});
+                        q.offer(new int[]{i, j, 0});
                     }else if(arr[i][j] == '@'){
-                        person.offer(new int[]{i, j});
+                        person = new int[]{i, j, 1};
                     }
                 }
             }
+            q.offer(person);
 
             int count = 0;
             boolean isExited = false;
-            while(!person.isEmpty() && !isExited){
-                int fSize = fire.size();
-                while(fSize-- > 0){
-                    int[] now = fire.poll();
-
-                    for(int i = 0; i < 4; i++){
-                        int[] next = {now[0] + d[i][0], now[1] + d[i][1]};
-
-                        if(next[0] < 0 || next[0] >= h || next[1] < 0 || next[1] >= w || arr[next[0]][next[1]] == '#' || arr[next[0]][next[1]] == '*'){
-                            continue;
-                        }
-
-                        fire.offer(next);
-                        arr[next[0]][next[1]] = '*';
-                    }
-                }
-
+            while(!q.isEmpty() && !isExited){
                 count++;
-                int pSize = person.size();
-                while(pSize-- > 0){
-                    int[] now = person.poll();
+
+                int size = q.size();
+                while(size-- > 0 && !isExited){
+                    int[] now = q.poll();
 
                     for(int i = 0; i < 4; i++){
-                        int[] next = {now[0] + d[i][0], now[1] + d[i][1]};
+                        int[] next = {now[0] + d[i][0], now[1] + d[i][1], now[2]};
 
                         if(next[0] < 0 || next[0] >= h || next[1] < 0 || next[1] >= w){
-                            sb.append(count).append("\n");
-                            isExited = true;
-                            pSize = 0;
-                            break;
-                        }
+                            if(next[2] == 1){
+                                sb.append(count).append("\n");
+                                isExited = true;
+                                break;
+                            }
 
-                        if(arr[next[0]][next[1]] == '#' || arr[next[0]][next[1]] == '*' || arr[next[0]][next[1]] == '@'){
                             continue;
                         }
 
-                        person.offer(next);
-                        arr[next[0]][next[1]] = '@';
+                        if(arr[next[0]][next[1]] == '#' || arr[next[0]][next[1]] == '*' || (arr[next[0]][next[1]] == '@' && next[2] == 1)){
+                            continue;
+                        }
+
+                        q.offer(next);
+                        if(next[2] == 0){
+                            arr[next[0]][next[1]] = '*';
+                        }else{
+                            arr[next[0]][next[1]] = '@';
+                        }
                     }
                 }
             }
