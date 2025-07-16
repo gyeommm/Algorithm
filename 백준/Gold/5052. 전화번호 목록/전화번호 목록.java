@@ -16,15 +16,14 @@ class Main{
             }
             Arrays.sort(arr);
 
-            boolean isYes = true;
-            for(int i = 0; i < n - 1; i++){
+            int i = 0;
+            for(; i < n - 1; i++){
                 if(arr[i + 1].startsWith(arr[i])){
                     sb.append("NO\n");
-                    isYes = false;
                     break;
                 }
             }
-            if(isYes){
+            if(i == n - 1){
                 sb.append("YES\n");
             }
         }
