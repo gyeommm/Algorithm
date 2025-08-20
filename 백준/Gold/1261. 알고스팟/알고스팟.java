@@ -24,14 +24,14 @@ class Main{
         }
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {return a[2] - b[2];});    // {r, c, count}
         pq.offer(new int[]{0, 0, 0});
+        visited[0][0] = 0;
 
         while(!pq.isEmpty()){
             int[] now = pq.poll();
 
-            if(now[2] >= visited[now[0]][now[1]]){
+            if(now[2] > visited[now[0]][now[1]]){
                 continue;
             }
-            visited[now[0]][now[1]] = now[2];
 
             for(int i = 0; i < 4; i++){
                 int[] next = {now[0] + d[i][0], now[1] + d[i][1], now[2]};
@@ -45,6 +45,7 @@ class Main{
                     continue;
                 }
 
+                visited[next[0]][next[1]] = next[2];
                 pq.offer(next);
             }
         }
