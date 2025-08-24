@@ -1,23 +1,23 @@
 #include <iostream>
-#include <map>
-#include <set>
-#include <vector>
 #include <string>
+#include <unordered_set>
 using namespace std;
 
-int main()
-{
-    string str;
-    cin >> str;
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-    set<string> s;
+    string s;
+    cin >> s;
+
+    unordered_set<string> us;
     int result = 0;
-    for (int j = 1; j <= str.size(); j++) {
-        for (int i = 0; i + j <= str.size(); i++)
-            s.insert(str.substr(i, j));
-
-        result += s.size();
-        s.clear();
+    for (int i = 1; i <= s.size(); i++) {
+        for (int j = 0; j + i <= s.size(); j++)
+            us.insert(s.substr(j, i));
+        
+        result += us.size();
+        us.clear();
     }
 
     cout << result;
