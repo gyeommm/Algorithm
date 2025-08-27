@@ -22,11 +22,11 @@ class Main{
             }
         }
 
-        Queue<int[]> enemy = new ArrayDeque<>();
+        List<int[]> enemy = new ArrayList<>();
         for(int j = 0; j < m; j++){
             for(int i = 0; i < n; i++){
                 if(arr[i][j] == 1){
-                    enemy.offer(new int[]{i, j});
+                    enemy.add(new int[]{i, j});
                 }
             }
         }
@@ -39,54 +39,50 @@ class Main{
                 archer[1][1] = j;
                 for(int k = j + 1; k < m; k++){
                     archer[2][1] = k;
-                    int count = 0;
 
-                    Queue<int[]> copy = new ArrayDeque<>();
+                    List<int[]> copy = new ArrayList<>();
                     for (int[] e : enemy) {
-                        copy.offer(e.clone());
+                        copy.add(e.clone());
                     }
 
-                    while(!copy.isEmpty()){
-                        int[][] death = {{-1, -1, 225}, {-1, -1, 225}, {-1, -1, 225}};
-                        int size = copy.size();
+                    int count = 0;
+                    boolean check = true;
+                    while(check){
+                        check = false;
+                        int[][] target = {{225, -1}, {225, -1}, {225, -1}};
 
-                        for(int s = 0; s < size; s++){
-                            int[] e = copy.poll();
+                        for(int s = 0; s < copy.size(); s++){
+                            int[] e = copy.get(s);
+                            if(e[0] >= n){
+                                continue;
+                            }
 
+                            check = true;
                             for(int l = 0; l < 3; l++){
                                 int dist = distance(archer[l], e);
-                                if(dist > d || dist >= death[l][2]){
+                                if(dist > d || dist >= target[l][0]){
                                     continue;
                                 }
 
-                                death[l][0] = e[0];
-                                death[l][1] = e[1];
-                                death[l][2] = dist;
+                                target[l][0] = dist;
+                                target[l][1] = s;
                             }
 
-                            copy.offer(e);
+                            e[0]++;
                         }
 
-                        for(int s = 0; s < size; s++){
-                            int[] e = copy.poll();
-
-                            boolean isDead = false;
-                            for(int l = 0; l < 3; l++) {
-                                if(e[0] == death[l][0] && e[1] == death[l][1]){
-                                    isDead = true;
-                                    count++;
-                                    break;
-                                }
-                            }
-
-                            if(isDead || e[0] + 1 >= n){
+                        for(int l = 0; l < 3; l++){
+                            int s = target[l][1];
+                            if(s == -1 || copy.get(s)[0] == n + 1){
                                 continue;
                             }
-                            copy.offer(new int[]{e[0] + 1, e[1]});
-                        }
 
-                        result = Math.max(result, count);
+                            copy.get(s)[0] = n + 1;
+                            count++;
+                        }
                     }
+
+                    result = Math.max(result, count);
                 }
             }
         }
