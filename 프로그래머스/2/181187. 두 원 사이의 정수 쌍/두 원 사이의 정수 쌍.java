@@ -6,8 +6,9 @@ class Solution {
         long temp2 = (long) r2 * r2;
         
         for(int x = r2; x > 0; x--){
-            int maxY = (int)Math.sqrt(temp2 - (long)x * x);
-            int minY = (int)Math.ceil(Math.sqrt(temp1 - (long)x * x));
+            long temp = (long)x * x;
+            int maxY = (int)Math.sqrt(temp2 - temp);
+            int minY = (int)Math.ceil(Math.sqrt(temp1 - temp));
             
             answer += maxY - minY + 1;
         }
