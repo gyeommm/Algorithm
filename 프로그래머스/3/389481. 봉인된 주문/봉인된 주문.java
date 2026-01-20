@@ -14,9 +14,10 @@ class Solution {
         for(int i = 0; i < bans.length; i++){
             long ascii = 0;
             
-            for(int j = 0; j < bans[i].length(); j++){
+            long mul = 1;
+            for(int j = 0; j < bans[i].length(); j++, mul *= 26){
                 char now = bans[i].charAt(bans[i].length() - 1 - j);
-                ascii += Math.pow(26, j) * (now - 'a' + 1);
+                ascii += mul * (now - 'a' + 1);
             }
             
             if(ascii > n){
