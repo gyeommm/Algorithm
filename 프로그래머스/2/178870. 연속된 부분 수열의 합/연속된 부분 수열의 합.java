@@ -6,7 +6,7 @@ class Solution {
         int s = 0;
         int e = 0;
         int sum = sequence[s];
-        while(s <= e){
+        while(true){
             if(sum == k && min > e - s){
                 answer = new int[]{s, e};
                 min = e - s;
@@ -16,7 +16,6 @@ class Solution {
                 if(e == sequence.length - 1){
                     break;
                 }
-                
                 sum += sequence[++e];
             }else if(sum > k){
                 sum -= sequence[s++];
