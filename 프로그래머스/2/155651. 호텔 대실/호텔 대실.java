@@ -9,12 +9,7 @@ class Solution {
     public int solution(String[][] book_time) {
         int answer = 1;
         
-        Arrays.sort(book_time, (a, b) -> {
-            if(a[0].equals(b[0])){
-                return a[1].compareTo(b[1]);
-            }
-            return a[0].compareTo(b[0]);
-        });
+        Arrays.sort(book_time, (a, b) -> a[0].compareTo(b[0]));
         
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         pq.offer(0);
