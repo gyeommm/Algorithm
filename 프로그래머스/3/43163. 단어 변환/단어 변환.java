@@ -11,16 +11,6 @@ class Solution {
         }
     }
     
-    static class Node2{
-        String s;
-        int count;
-        
-        Node2(String s, int count){
-            this.s = s;
-            this.count = count;
-        }
-    }
-    
     public int solution(String begin, String target, String[] words) {
         int answer = 0;
         
@@ -70,30 +60,35 @@ class Solution {
             }
         }
         
-        Queue<Node2> q = new ArrayDeque<>();
-        q.offer(new Node2(begin, 0));
+        Queue<String> q = new ArrayDeque<>();
+        q.offer(begin);
         m.get(begin).isVisited = true;
 
         while(!q.isEmpty()){
-            Node2 temp = q.poll();
-            if(temp.s.equals(target)){
-                answer = temp.count;
-                break;
-            }
+            int size = q.size();
             
-            Node now = m.get(temp.s);
-            
-            for(String s : now.list){
-                Node next = m.get(s);
-                if(next.isVisited){
-                    continue;
+            for(int i = 0; i < size; i++){
+                String s = q.poll();
+                if(s.equals(target)){
+                    q.clear();
+                    break;
                 }
                 
-                q.offer(new Node2(s, temp.count + 1));
-                next.isVisited = true;
+                Node now = m.get(s);
+                for(String ss : now.list){
+                    Node next = m.get(ss);
+                    if(next.isVisited){
+                        continue;
+                    }
+
+                    q.offer(ss);
+                    next.isVisited = true;
+                }
             }
+            
+            answer++;
         }
         
-        return answer;
+        return answer - 1;
     }
 }
