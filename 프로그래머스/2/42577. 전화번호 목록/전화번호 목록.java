@@ -5,25 +5,11 @@ class Solution {
         boolean answer = true;
         
         Arrays.sort(phone_book);
-        
-        String prev = "";
-        for(String now : phone_book){
-            if(prev.length() <= now.length()){
-                for(int i = 0; i < prev.length(); i++){
-                    if(prev.charAt(i) == now.charAt(i)){
-                        answer = false;
-                    }else{
-                        answer = true;
-                        break;
-                    }
-                }
-
-                if(!answer){
-                    break;
-                }
+        for(int i = 1; i < phone_book.length; i++){
+            if(phone_book[i].startsWith(phone_book[i - 1])){
+                answer = false;
+                break;
             }
-            
-            prev = now;
         }
         
         return answer;
