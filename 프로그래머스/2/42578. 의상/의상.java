@@ -5,11 +5,8 @@ class Solution {
         int answer = 1;
         
         Map<String, Integer> map = new HashMap<>();
-        for(int i = 0; i < clothes.length; i++){
-            String type = clothes[i][1];
-            
-            int c = map.getOrDefault(type, 1);
-            map.put(type, ++c);
+        for(String[] s : clothes){
+            map.put(s[1], map.getOrDefault(s[1], 1) + 1);
         }
         
         for(int c : map.values()){
