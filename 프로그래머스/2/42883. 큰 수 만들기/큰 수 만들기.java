@@ -2,21 +2,22 @@ import java.util.*;
 
 class Solution {
     public String solution(String number, int k) {
-        char[] result = new char[number.length() - k];
-        Stack<Character> st = new Stack<>();
+        Deque<Character> st = new ArrayDeque<>();
 
-        for (int i = 0; i < number.length(); i++) {
+        int size = number.length() - k;
+        for(int i = 0; i < number.length(); i++){
             char c = number.charAt(i);
-            while (!st.isEmpty() && st.peek() < c && k-- > 0) {
+            while(!st.isEmpty() && st.peek() < c && k-- > 0){
                 st.pop();
             }
             st.push(c);
         }
         
-        for (int i = 0; i < result.length; i++) {
-            result[i] = st.get(i);
+        StringBuilder sb = new StringBuilder();
+        while(!st.isEmpty()){
+            sb.append(st.pop());
         }
         
-        return new String(result);
+        return sb.reverse().toString().substring(0, size);
     }
 }
