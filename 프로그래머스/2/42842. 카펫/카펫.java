@@ -8,10 +8,9 @@ class Solution {
                 continue;
             }
             
-            answer = new int[]{Math.max(sum / i, i), Math.min(sum / i, i)};
-            
-            if((answer[0] - 2) * (answer[1] - 2) >= yellow){
-                break;
+            int temp = sum / i;
+            if((temp - 2) * (i - 2) == yellow){
+                answer = new int[]{Math.max(temp, i), Math.min(temp, i)};
             }
         }
         
