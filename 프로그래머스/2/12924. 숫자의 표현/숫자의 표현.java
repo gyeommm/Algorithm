@@ -4,19 +4,15 @@ class Solution {
         
         int max = n / 2 + 1;
         int min = n / 2;
-        
         int sum = max + min;
         while(min >= 1){
             if(sum == n){
                 answer++;
-                sum -= max--;
-                sum += --min;
-            }else if(sum > n){
-                sum -= max--;
-                sum += --min;
-            }else if(sum < n){
-                sum += --min;
             }
+            if(sum >= n){
+                sum -= max--;
+            }
+            sum += --min;
         }
         
         return answer;
