@@ -1,36 +1,34 @@
-import java.util.*;
-
 class Solution {
     public int solution(int n, int[] lost, int[] reserve) {
         int answer = n - lost.length;
         
-        List<Integer> list = new ArrayList<>();
-        boolean[] arr = new boolean[31];
+        boolean[] a1 = new boolean[31];
+        boolean[] a2 = new boolean[32];
         
         for(int v : reserve){
-            arr[v] = true;
+            a2[v] = true;
         }
-        
         for(int v : lost){
-            if(arr[v]){
-                arr[v] = false;
+            if(a2[v]){
+                a2[v] = false;
                 answer++;
                 continue;
             }
-            list.add(v);
+            a1[v] = true;
         }
         
-        Collections.sort(list);
-        for(int v : list){
-            if(arr[v - 1]){
-                v--;
-            }else if(arr[v + 1]){
-                v++;
-            }else{
+        for(int i = 1; i < 31; i++){
+            if(!a1[i]){
                 continue;
             }
             
-            arr[v] = false;
+            if(a2[i - 1]){
+                a2[i - 1] = false;
+            }else if(a2[i + 1]){
+                a2[i + 1] = false;
+            }else{
+                continue;
+            }
             answer++;
         }
         
