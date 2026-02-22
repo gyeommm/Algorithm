@@ -1,25 +1,12 @@
 class Solution {
     public int solution(int n) {
         int answer = n;
+        int k = Integer.bitCount(n);    // 비트 1의 개수 반환
         
-        int count = -1, prev = 0, index = 0;
-        while(n > 0){
-            int temp = n % 2;
-            n /= 2;
-            
-            if(temp == 1){
-                count++;
-                answer -= Math.pow(2, index);
-            }else if(prev == 1){
+        while(++answer > 0){
+            if(Integer.bitCount(answer) == k){
                 break;
             }
-            prev = temp;
-            index++;
-        }
-        
-        answer += Math.pow(2, index);
-        while(--count >= 0){
-            answer += Math.pow(2, count);
         }
         
         return answer;
