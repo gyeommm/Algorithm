@@ -5,6 +5,7 @@ class Solution {
         int count = -1, prev = 0, index = 0;
         while(n > 0){
             int temp = n % 2;
+            n /= 2;
             
             if(temp == 1){
                 count++;
@@ -14,8 +15,6 @@ class Solution {
             }
             prev = temp;
             index++;
-            
-            n /= 2;
         }
         
         answer += Math.pow(2, index);
