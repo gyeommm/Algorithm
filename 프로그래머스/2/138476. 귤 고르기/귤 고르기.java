@@ -9,14 +9,12 @@ class Solution {
             map.put(size, map.getOrDefault(size, 0) + 1);
         }
         
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
-        for(int count : map.values()){
-            pq.offer(count);
-        }
+        List<Integer> list = new ArrayList<>(map.values());
+        list.sort((a, b) -> b - a);
         
         int count = 0;
-        while(count < k){
-            count += pq.poll();
+        for(int i = 0; count < k; i++){
+            count += list.get(i);
             answer++;
         }
         
