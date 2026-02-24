@@ -5,14 +5,11 @@ class Solution {
         int n = triangle.length;
         for(int i = 1; i < n; i++){
             int m = triangle[i].length;
-            for(int j = 0; j < m; j++){
-                if(j == 0){
-                    triangle[i][j] += triangle[i - 1][j];
-                }else if(j == m - 1){
-                    triangle[i][j] += triangle[i - 1][j - 1];
-                }else{
-                    triangle[i][j] += Math.max(triangle[i - 1][j - 1], triangle[i - 1][j]);
-                }
+            
+            triangle[i][0] += triangle[i - 1][0];
+            triangle[i][m - 1] += triangle[i - 1][m - 2];
+            for(int j = 1; j < m - 1; j++){
+                triangle[i][j] += Math.max(triangle[i - 1][j - 1], triangle[i - 1][j]);
             }
         }
         
