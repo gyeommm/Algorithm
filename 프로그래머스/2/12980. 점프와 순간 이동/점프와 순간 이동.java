@@ -5,7 +5,6 @@ public class Solution {
         int answer = 0;
         while(n > 0){
             if(n % 2 == 1){
-                n--;
                 answer++;
             }
             n /= 2;
