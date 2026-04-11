@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static List<List<int[]>> g = new ArrayList<>();
+    static List<List<int[]>> g;
 
     static void f(int[] dist, int s){
         Arrays.fill(dist, 200000000);
@@ -34,6 +34,7 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int e = Integer.parseInt(st.nextToken());
 
+        g = new ArrayList<>();
         for (int i = 0; i <= n; i++)
             g.add(new ArrayList<>());
 
