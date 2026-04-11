@@ -15,16 +15,16 @@ class Main{
             app[i][0] = Integer.parseInt(st.nextToken());
         }
         
-        int costSum = 0;
+        int sumCost = 0;
         st = new StringTokenizer(br.readLine());
         for(int i = 0; i < n; i++){
             app[i][1] = Integer.parseInt(st.nextToken());
-            costSum += app[i][1];
+            sumCost += app[i][1];
         }
         
-        int[] dp = new int[costSum + 1];
+        int[] dp = new int[sumCost + 1];
         for(int i = 0; i < n; i++){
-            for(int j = costSum; j >= app[i][1]; j--){
+            for(int j = sumCost; j >= app[i][1]; j--){
                 dp[j] = Math.max(dp[j], dp[j - app[i][1]] + app[i][0]);
             }
         }
