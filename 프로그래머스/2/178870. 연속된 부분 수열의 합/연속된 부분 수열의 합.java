@@ -1,25 +1,22 @@
 class Solution {
     public int[] solution(int[] sequence, int k) {
-        int[] answer = {0, sequence.length - 1};
-        int min = answer[1] - answer[0];
-        
+        int[] answer = {0, 1000001};
         int s = 0;
-        int e = 0;
-        int sum = sequence[s];
-        while(true){
-            if(sum == k && min > e - s){
-                answer = new int[]{s, e};
-                min = e - s;
+        int sum = 0;
+        
+        for(int e = 0; e < sequence.length; e++){  
+            sum += sequence[e];
+            while(sum > k){
+                sum -= sequence[s++];
             }
             
-            if(sum <= k){
-                if(e == sequence.length - 1){
-                    break;
+            if(sum == k){
+                int temp = answer[1] - answer[0];
+                if(temp > e - s){
+                    answer[0] = s;
+                    answer[1] = e;
                 }
-                sum += sequence[++e];
-            }else if(sum > k){
-                sum -= sequence[s++];
-            }            
+            }
         }
         
         return answer;
