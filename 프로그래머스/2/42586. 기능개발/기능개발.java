@@ -17,8 +17,8 @@ class Solution {
             answer.add(i - index);
             index = i;
         }
-        
         answer.add(days.length - index);
+        
         return answer;
     }
 }
