@@ -6,11 +6,6 @@ class Solution {
         
         Deque<Integer> st = new ArrayDeque<>();
         for(int i = 0; i < prices.length; i++){
-            if(st.isEmpty()){
-                st.push(i);
-                continue;
-            }
-            
             while(!st.isEmpty()){
                 if(prices[st.peek()] <= prices[i]){
                     break;
