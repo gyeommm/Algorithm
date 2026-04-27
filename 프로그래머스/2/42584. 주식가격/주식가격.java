@@ -6,17 +6,24 @@ class Solution {
         
         Deque<Integer> st = new ArrayDeque<>();
         for(int i = 0; i < prices.length; i++){
-            int now = prices[i];
+            if(st.isEmpty()){
+                st.push(i);
+                continue;
+            }
             
-            while(!st.isEmpty() && prices[st.peek()] > prices[i]){
-                int index = st.pop();
+            while(!st.isEmpty()){
+                if(prices[st.peek()] <= prices[i]){
+                    break;
+                }
+                
+                int index = st.poll();
                 answer[index] = i - index;
             }
             st.push(i);
         }
         
         while(!st.isEmpty()){
-            int index = st.pop();
+            int index = st.poll();
             answer[index] = prices.length - 1 - index;
         }
         
