@@ -26,10 +26,8 @@ class Solution {
             int[] date = splitToInt(temp[0]);
             
             date[1] += termsMap.get(temp[1]);
-            while(date[1] > 12){
-                date[0]++;
-                date[1] -= 12;
-            }
+            date[0] += (date[1] - 1) / 12;
+            date[1] = (date[1] - 1) % 12 + 1;
             
             for(int j = 0; j < todayInt.length; j++){
                 if(todayInt[j] < date[j]){
