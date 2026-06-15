@@ -15,29 +15,29 @@ class Solution {
         }
         
         Queue<int[]> q = new ArrayDeque<>();
-        boolean[] visited = new boolean[edge.length + 1];
-        
+        int[] visited = new int[edge.length + 1];
         q.offer(new int[]{1, 0});
-        visited[1] = true;
+        visited[1] = 1;
         
-        int depth = 0;
+        int depthMax = 0;
         while(!q.isEmpty()){
             int[] now = q.poll();
-            if(now[1] > depth){
-                depth = now[1];
-                answer = 1;
-            }else{
-                answer++;
-            }
+            depthMax = Math.max(depthMax, now[1]);
             
             for(int i = 0; i < list.get(now[0]).size(); i++){
-                int next = list.get(now[0]).get(i);
-                if(visited[next]){
+                int[] next = new int[]{list.get(now[0]).get(i), now[1] + 1};
+                if(visited[next[0]] > 0){
                     continue;
                 }
                 
-                q.offer(new int[]{next, now[1] + 1});
-                visited[next] = true;
+                q.offer(next);
+                visited[next[0]] = next[1];
+            }
+        }
+        
+        for(int i = 1; i < visited.length; i++){
+            if(visited[i] == depthMax){
+                answer++;
             }
         }
         
